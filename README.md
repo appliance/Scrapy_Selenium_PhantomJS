@@ -5,6 +5,9 @@
 1、	利用PhantomJS来获取页面初始化进行js自动加载的页面
 利用PhantomJS(PhantomJS就是一个没有界面的浏览器，提供了JavaScript
 接口,利用执行js来达到浏览器的效果),编写js代码用来输出访问某个具体网页返回的内容。
+  ![Alt Text](
+     https://github.com/appliance/Scrapy_Selenium_PhantomJS/blob/master/1.png
+    )
 	 （注意：必须安装PhantomJS并配置好环境变量）
 打开cmd进入目标js目录中，输入命令：phantomjs ./test.js http://baidu.com
 就会打印得到的html代码。
@@ -13,7 +16,9 @@
 2、	Selenium自动化测试工具
 Selenium需要进行pip安装，这里主要用到了它的Webdriver操作浏览器。
 Selenium操作无界面浏览器PhantomJS
-	 
+	  ![Alt Text](
+     https://github.com/appliance/Scrapy_Selenium_PhantomJS/blob/master/2.png
+    )
 此处的driver.get()方法会等待页面加载完成后才返回，也就是说js会加载完毕，有很多ajax的情况除外。
 
 3、	研究scrapy的下载器中间件
@@ -30,11 +35,16 @@ Selenium操作无界面浏览器PhantomJS
 创建完scrapy项目后依旧需要设置items,piplines以及创建一个爬虫文件，关键点是
 对爬虫文件、middlewares.py，以及settings.py文件的编写
 
-	爬虫文件rosterLinkSpd.py的内容
- 
-	区别于静态网页的爬取，在此爬虫文件的parse函数，（添加头from scrapy.http import Request）先创建一个新的request请求，结果设置返回给parse_post函数进行处理。并在新request中添加一个meta用于中简件做处理的标识，返回新的request请求
-
-（middlewares.py）中间件的process_request函数接受到新的request请求进行处理。代码 此文件需要添加头from selenium import webdriver
+爬虫文件rosterLinkSpd.py的内容
+ 	  ![Alt Text](
+     https://github.com/appliance/Scrapy_Selenium_PhantomJS/blob/master/3.png
+    )
+区别于静态网页的爬取，在此爬虫文件的parse函数，（添加头from scrapy.http import Request）先创建一个新的request请求，结果设置返回给parse_post函数进行处理。并在新request中添加一个meta用于中简件做处理的标识，返回新的request请求
+（middlewares.py）中间件的process_request函数接受到新的request请求进行处理。代码 
+  ![Alt Text](
+     https://github.com/appliance/Scrapy_Selenium_PhantomJS/blob/master/4.png
+    )
+此文件需要添加头from selenium import webdriver
 from scrapy.http import HtmlResponse
 中间件中利用Selenium调用PhantomJS来进行动态页面的请求。获取加载完的动态页面，再利用HtmlResponse将结果返回给爬虫文件，爬虫文件中的parse_post函数按照静态网页的套路直接利用xpath进行获取内容就可以了。
 
