@@ -1,6 +1,5 @@
 # Scrapy_Selenium_PhantomJS
 基于scrapy静态网页爬取，结合Selenium和PhantomJS实现简单的自动加载js的动态页面
-基于scrapy静态网页爬取，结合Selenium和PhantomJS实现简单的自动加载js的动态页面
 
 1、	利用PhantomJS来获取页面初始化进行js自动加载的页面
 利用PhantomJS(PhantomJS就是一个没有界面的浏览器，提供了JavaScript
